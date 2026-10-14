@@ -171,7 +171,45 @@ JWT_SECRET=karnataka_higher_education_fund_mgmt_jwt_secret_key_2024
 DATABASE_PATH=./data/university_fund_mgmt.db
 MAX_UPLOAD_SIZE_MB=25
 VITE_API_URL=http://localhost:5000/api
+
+# Supabase Cloud Database (Project: college-fund-mgmt | ID: gkbrcbmwmdrsywfjinfp | Region: ap-northeast-2)
+SUPABASE_PROJECT_ID=gkbrcbmwmdrsywfjinfp
+SUPABASE_URL=https://gkbrcbmwmdrsywfjinfp.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
+SUPABASE_ANON_KEY=your_anon_public_key_here
+
+VITE_SUPABASE_URL=https://gkbrcbmwmdrsywfjinfp.supabase.co
+VITE_SUPABASE_ANON_KEY=your_anon_public_key_here
 ```
+
+---
+
+## 8. Supabase Cloud Database Setup Guide
+
+The application connects to **Supabase** (PostgreSQL cloud database):
+- **Project Name**: `college-fund-mgmt`
+- **Project ID**: `gkbrcbmwmdrsywfjinfp`
+- **Region**: `ap-northeast-2` (Seoul)
+- **Supabase Endpoint**: `https://gkbrcbmwmdrsywfjinfp.supabase.co`
+
+### Step-by-Step Instructions:
+1. **Run Database Migrations**:
+   - Open your project SQL editor: [https://supabase.com/dashboard/project/gkbrcbmwmdrsywfjinfp/sql/new](https://supabase.com/dashboard/project/gkbrcbmwmdrsywfjinfp/sql/new)
+   - Copy the contents of [`server/database/supabase_schema.sql`](file:///server/database/supabase_schema.sql) and paste it into the editor.
+   - Click **Run**. This creates all 18 normalized tables, indexes, row-level security policies, and initial university seed records (BCU, departments, 18 scheduled bank accounts).
+
+2. **Add Your Supabase API Keys**:
+   - Go to [https://supabase.com/dashboard/project/gkbrcbmwmdrsywfjinfp/settings/api](https://supabase.com/dashboard/project/gkbrcbmwmdrsywfjinfp/settings/api)
+   - Copy your `anon` `public` key and `service_role` `secret` key.
+   - Paste them into `.env`:
+     ```env
+     SUPABASE_SERVICE_ROLE_KEY=eyJh...
+     SUPABASE_ANON_KEY=eyJh...
+     VITE_SUPABASE_ANON_KEY=eyJh...
+     ```
+
+3. **Verify Connectivity**:
+   - Check the diagnostic API: `http://localhost:5000/api/supabase/status`
 
 ---
 

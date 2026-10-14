@@ -11,6 +11,7 @@ import aiValidationRoutes from './routes/aiValidation.routes.js';
 import analyticsRoutes from './routes/analytics.routes.js';
 import reportRoutes from './routes/report.routes.js';
 import auditLogRoutes from './routes/auditLog.routes.js';
+import supabaseRoutes from './routes/supabase.routes.js';
 import { createEntityRouter } from './routes/entity.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -46,6 +47,7 @@ export function createApp() {
   app.use('/api/analytics', analyticsRoutes);
   app.use('/api/reports', reportRoutes);
   app.use('/api/audit-logs', auditLogRoutes);
+  app.use('/api/supabase', supabaseRoutes);
 
   // Relational Entity Routes
   app.use('/api/universities', createEntityRouter('universities', 'university_id'));
